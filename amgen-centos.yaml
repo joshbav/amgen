@@ -26,3 +26,13 @@ spec:
         securityContext:
           # Note in production you would not use full privileged 
           privileged: true
+        env:
+        - name: NFS4_SERVER
+          value: "fs-06893bae.efs.us-west-2.amazonaws.com"
+        - name: NFS4_SERVER-MOUNT
+          value: "/"
+        - name: NFS4_OPTIONS
+          value: "nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport"
+        - name: NFS4_LOCAL_MOUNTPOINT
+          value: "/data"
+
