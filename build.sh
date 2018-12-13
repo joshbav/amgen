@@ -1,4 +1,4 @@
-docker build --squash -t joshbav/amgen-centos:latest .
+docker build -t joshbav/amgen-centos:latest .
 echo
 echo
 echo
