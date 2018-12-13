@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs
+spec:
+  capacity:
+    # Note this is where you set the upper limit to the size use, since EFS has no upper limit
+    # Set to 1 TB for now
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: fs-69f546c1.efs.us-west-2.amazonaws.com
+    path: "/"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Ti
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: centos
+  labels:
+    app: centos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: centos
+  template:
+    metadata:
+      labels:
+        app: centos
+    spec:
+      containers:
+      - name: centos
+        image: joshbav/centos
+        command: ["sleep", "1000000"]
+        resources:
+          requests:
+            memory: 100M
+            cpu: 0.1
+        securityContext:
+          privileged: true
+        volumeMounts:
+            # name must match the volume name below
+            - name: efs
+              mountPath: "/mnt"
+      volumes:
+      - name: efs
+        persistentVolumeClaim:
+          claimName: efs
