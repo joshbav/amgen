@@ -65,3 +65,4 @@ ENV LC_ALL en_US.UTF-8
 #### RUN yum clean all
 
 ADD startup.sh /startup.sh
+RUM chmod +x /startup.sh
