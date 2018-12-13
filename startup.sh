@@ -1,3 +1,4 @@
+set -x
 mkdir /data
 echo
 echo "Mounting NFS v4 AWS EFS mount"
