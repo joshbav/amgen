@@ -17,11 +17,12 @@ spec:
       containers:
       - name: centos
         image: joshbav/amgen-centos
-        command: ["./startup.sh"]
+        command: ["/usr/bin/bash", "/startup.sh"]
         resources:
           requests:
             memory: 100M
             cpu: 0.1
+        imagePullPolicy: Always
         securityContext:
           # Note in production you would not use full privileged 
           privileged: true
