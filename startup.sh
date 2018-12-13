@@ -2,6 +2,7 @@ set -x
 mkdir /data
 echo
 echo "Mounting NFS v4 AWS EFS mount"
+echo "NFS utilities must already be installed"
 echo
 mount -t nfs4 -o $NFS4_OPTIONS $NFS4_SERVER:$NFS4_SERVER_MOUNT $NFS4_LOCAL_MOUNTPOINT
 echo
